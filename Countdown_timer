@@ -1,0 +1,28 @@
+import time
+
+class CountdownTimer:
+    def __init__(self, minutes):
+        self.seconds = minutes * 60
+        self.paused = False
+
+    def start(self):
+        while self.seconds:
+            if not self.paused:
+                mins, secs = divmod(self.seconds, 60)
+                timer = '{:02d}:{:02d}'.format(mins, secs)
+                print(timer, end="\r")
+                time.sleep(1)
+                self.seconds -= 1
+
+    def pause(self):
+        self.paused = True
+
+    def resume(self):
+        self.paused = False
+
+    def reset(self, minutes):
+        self.seconds = minutes * 60
+
+# Usage
+timer = CountdownTimer(1) # 1 minutes
+timer.start()
